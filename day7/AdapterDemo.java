@@ -1,0 +1,49 @@
+package day7;
+public class AdapterDemo {
+	public static void main(String[] args) {
+		IndianSocket ss=new ShakthiSocket();
+		AmericanPlug ap=new LenovoPlug();
+		
+		IndianAdapter ip=new IndianAdapter(ap);
+		
+		ss.roundPinHole(ip);
+	}
+}
+
+abstract class IndianPlug{
+	public abstract void roundPin();
+}
+abstract class IndianSocket{
+	public abstract void roundPinHole(IndianPlug ip);
+}
+abstract class AmericanPlug{
+	public abstract void slabPin();
+}
+abstract class AmericanSocket{
+	public abstract void slabPinHole(AmericanPlug ap);
+}
+
+
+class IndianAdapter extends IndianPlug{
+	AmericanPlug ap;
+	public IndianAdapter(AmericanPlug ap) {
+		this.ap=ap;
+	}
+	@Override
+	public void roundPin() {
+		ap.slabPin();
+	}
+}
+class ShakthiSocket extends IndianSocket{
+	@Override
+	public void roundPinHole(IndianPlug ip) {
+//		System.out.println("hi");
+		ip.roundPin();
+	}
+}
+class LenovoPlug extends AmericanPlug{
+	@Override
+	public void slabPin() {
+		System.out.println("slab pin working.....");
+	}
+}
