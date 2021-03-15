@@ -93,7 +93,7 @@ class UserHandler extends DefaultHandler {
 			Session session=Session.getInstance(properties, new Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {				
-					return new PasswordAuthentication("saiprasaad1999@gmail.com", "redminote4");
+					return new PasswordAuthentication("saiprasaad1999@gmail.com", "password");
 				}
 			});
 			session.setDebug(true);
