@@ -29,15 +29,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class XMLToPDF {
 	public static void main(String[] args) {
-		Object obj1=new BehaviouralClass();
+		Object obj1=new XMLToPDF();
 		createPDF createPDFobj=new createPDF();
-		obj1=Proxy.newProxyInstance(BehaviouralClass.class.getClassLoader(), new Class[] {PDF.class},new MyInvocationHandler(createPDFobj));
+		obj1=Proxy.newProxyInstance(XMLToPDF.class.getClassLoader(), new Class[] {PDF.class},new MyInvocationHandler(createPDFobj));
 		PDF pdfobj=(PDF)obj1;
 		pdfobj.convertToPdf();
 	}
-}
-class BehaviouralClass{
-	
 }
 class MyInvocationHandler implements InvocationHandler
 {
@@ -104,7 +101,7 @@ class createPDF implements PDF
 		dbf.setIgnoringElementContentWhitespace(true);
 		dbf.setValidating(true);
         DocumentBuilder db=dbf.newDocumentBuilder();
-		Document doc=db.parse("C:\\Java\\java_training\\eycorejava\\src\\dayfifteen\\items.xml");
+		Document doc=db.parse("C:\\Java\\java_training\\XMLtoPDF\\src\\items.xml");
         Element rootElement=doc.getDocumentElement();
 		for(int i=0;i<rootElement.getChildNodes().getLength();i++) {
 			for(int j=0;j<rootElement.getChildNodes().item(i).getChildNodes().getLength();j++) {  

@@ -20,15 +20,12 @@ import org.w3c.dom.Element;
 
 public class XMLToExcel {
 	public static void main(String[] args) {
-		Object obj1=new BehaviouralClass1();
+		Object obj1=new XMLToExcel();
 		createExcel createExcelobj=new createExcel();
-		obj1=Proxy.newProxyInstance(BehaviouralClass1.class.getClassLoader(), new Class[] {Excel.class},new MyInvocationHandler1(createExcelobj));
+		obj1=Proxy.newProxyInstance(XMLToExcel.class.getClassLoader(), new Class[] {Excel.class},new MyInvocationHandler1(createExcelobj));
 		Excel excelobj=(Excel)obj1;
 		excelobj.convertToExcel();
 	}
-}
-class BehaviouralClass1{
-	
 }
 class MyInvocationHandler1 implements InvocationHandler
 {
@@ -92,7 +89,7 @@ class createExcel implements Excel
 		
 		
 		DocumentBuilder db=dbf.newDocumentBuilder();
-		Document doc=db.parse("C:\\Java\\java_training\\eycorejava\\src\\dayfifteen\\items.xml");
+		Document doc=db.parse("C:\\Java\\java_training\\XMLToExcel\\src\\items.xml");
 		
 		
 		Element rootElement=doc.getDocumentElement();
