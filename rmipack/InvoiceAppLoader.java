@@ -3,7 +3,6 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 public class InvoiceAppLoader {
 	public static void main(String[] args)throws Exception {
-//		System.out.println("hi");
 		InvoiceServer is=new InvoiceServer();
 		
 		LocateRegistry.createRegistry(1099);
