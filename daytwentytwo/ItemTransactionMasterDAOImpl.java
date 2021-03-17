@@ -19,11 +19,12 @@ public class ItemTransactionMasterDAOImpl implements ItemTransactionMasterDAO{
 		try {
 			String query="insert into itemtransactionmaster (invno,itemno,itemqty) values(?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
+
 			ps.setInt(1, itemTransactionMasterDTO.getInvno());
 	        ps.setInt(2, itemTransactionMasterDTO.getItemno());
 	        ps.setInt(3, itemTransactionMasterDTO.getItemqty());
-	        System.out.println(ps);
 	        ps.execute();
+	        
 	        connection.commit();
 			}catch(Exception e) {e.printStackTrace();}
 			return 0;
@@ -104,5 +105,29 @@ public class ItemTransactionMasterDAOImpl implements ItemTransactionMasterDAO{
 		}
 		return itemtransactiondetails;
 	}
-
+	@Override
+	public Set<ItemTransactionMasterDTO> getItemTransactionMasterAllByInvno(int invoiceno) {
+		Set<ItemTransactionMasterDTO> itemtransactiondetails=new HashSet<ItemTransactionMasterDTO>();
+		Statement stmt;
+		String query="select * from itemtransactionmaster where invno=?";
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, invoiceno);
+			ItemTransactionMasterDTO itemtransactionobj;
+//			stmt = connection.createStatement();
+		
+		ResultSet rs=ps.executeQuery();
+		while(rs.next()) {
+			itemtransactionobj=new ItemTransactionMasterDTO();
+			itemtransactionobj.setInvno(rs.getInt("invno"));
+			itemtransactionobj.setItemno(rs.getInt("itemno"));
+			itemtransactionobj.setItemqty(rs.getInt("itemqty"));
+			itemtransactiondetails.add(itemtransactionobj);
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return itemtransactiondetails;
+	}
 }

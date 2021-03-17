@@ -20,9 +20,11 @@ public class MainClass {
 		System.out.println(customerdetails);
 		System.out.println(customermasterdaoimpl.getCustomerMaster(1));
 		CustomerMasterDTO customermasterdtoupdate=new CustomerMasterDTO();
-		customermasterdtoupdate.setCustomerno(3);
+		customermasterdtoupdate.setCustomerno(2);
 		customermasterdtoupdate.setCustomername("vignesh");
 		customermasterdtoupdate.setCustomerphone("9876543210");
+		customermasterdtoupdate.setCustomeraddress("hyderabad");
+		customermasterdtoupdate.setCustomeremail("vicky241299@gmail.com");
 		customermasterdaoimpl.updateCustomer(customermasterdtoupdate);
 		customermasterdaoimpl.deleteCustomer(3);
 		System.out.println("-----------------------");

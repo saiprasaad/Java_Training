@@ -8,4 +8,5 @@ public interface ItemTransactionMasterDAO {
 	public int updateItem(ItemTransactionMasterDTO itemTransactionMasterDTO);
 	public ItemTransactionMasterDTO getItemTransactionMaster(int invno,int itemno);
 	public Set<ItemTransactionMasterDTO> getItemTransactionMasterAll();
+	public Set<ItemTransactionMasterDTO> getItemTransactionMasterAllByInvno(int invoiceno);
 }

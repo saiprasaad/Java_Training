@@ -14,17 +14,24 @@ public class InvoiceMasterDAOImpl implements InvoiceMasterDAO {
 	}
 	@Override
 	public int insertInvoice(InvoiceMasterDTO invMasterDTO) {
+		ResultSet rs;
+        int ans=0;
 		try {
-			String query="insert into invoicemaster (invno,invdate,customerno) values(?,?,?)";
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setInt(1, invMasterDTO.getInvno());
-			ps.setDate(2, java.sql.Date.valueOf(invMasterDTO.getInvdate()));
-	        ps.setInt(3, invMasterDTO.getCustomerno());
-	        System.out.println(ps);
+			String query="insert into invoicemaster (invdate,customerno) values(?,?)";
+			PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+//			ps.setInt(1, invMasterDTO.getInvno());
+			ps.setDate(1, java.sql.Date.valueOf(invMasterDTO.getInvdate()));
+	        ps.setInt(2, invMasterDTO.getCustomerno());
+//	        System.out.println(ps);
 	        ps.execute();
+	        rs =ps.getGeneratedKeys();
+	        if (rs.next()) {
+//				System.out.println("Auto Generated Primary Key " + rs.getInt(1));
+	        	ans=rs.getInt(1);
+			}
 	        connection.commit();
 			}catch(Exception e) {e.printStackTrace();}
-			return 0;
+			return ans;
 		}
 
 	@Override
@@ -42,11 +49,12 @@ public class InvoiceMasterDAOImpl implements InvoiceMasterDAO {
 	@Override
 	public int updateInvoice(InvoiceMasterDTO invMasterDTO) {
 		InvoiceMasterDTO invoiceobj=new InvoiceMasterDTO();
-		String query="update invoicemaster set invdate=? where invno=?";
+		String query="update invoicemaster set invdate=?,custno=? where invno=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, invMasterDTO.getInvdate());
-			ps.setInt(2, invMasterDTO.getInvno());
+			ps.setInt(2, invMasterDTO.getCustomerno());
+			ps.setInt(3, invMasterDTO.getInvno());
 			System.out.println(ps);
 			ps.executeUpdate();
 			connection.commit();

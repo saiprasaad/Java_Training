@@ -16,12 +16,12 @@ public class ItemMasterDAOImpl implements ItemMasterDAO{
 	@Override
 	public int insertItemDetails(ItemMasterDTO itemMasterDTO) {
 		try {
-			String query="insert into itemmaster (itemno,itemdescription,itemprice,itemunit) values(?,?,?,?)";
+			String query="insert into itemmaster (itemdescription,itemprice,itemunit) values(?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setInt(1, itemMasterDTO.getItemno());
-	        ps.setString(2, itemMasterDTO.getItemdescription());
-	        ps.setInt(3, itemMasterDTO.getItemprice());
-	        ps.setString(4, itemMasterDTO.getItemunit());
+//			ps.setInt(1, itemMasterDTO.getItemno());
+	        ps.setString(1, itemMasterDTO.getItemdescription());
+	        ps.setInt(2, itemMasterDTO.getItemprice());
+	        ps.setString(3, itemMasterDTO.getItemunit());
 	        System.out.println(ps);
 	        ps.execute();
 	        connection.commit();
@@ -45,11 +45,13 @@ public class ItemMasterDAOImpl implements ItemMasterDAO{
 	@Override
 	public int updateItemDetails(ItemMasterDTO itemMasterDTO) {
 		ItemMasterDTO itemobj=new ItemMasterDTO();
-		String query="update itemmaster set itemdescription=? where itemno=?";
+		String query="update itemmaster set itemdescription=?,itemprice=?,itemunit=? where itemno=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, itemMasterDTO.getItemdescription());
-			ps.setInt(2, itemMasterDTO.getItemno());
+			ps.setInt(2, itemMasterDTO.getItemprice());
+			ps.setString(3, itemMasterDTO.getItemunit());
+			ps.setInt(4, itemMasterDTO.getItemno());
 			System.out.println(ps);
 			ps.executeUpdate();
 			connection.commit();

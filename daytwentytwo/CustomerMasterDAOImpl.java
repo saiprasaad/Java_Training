@@ -23,7 +23,6 @@ public class CustomerMasterDAOImpl implements CustomerMasterDAO{
         ps.setString(3, customerMasterDTO.getCustomeraddress());
         ps.setString(4, customerMasterDTO.getCustomeremail());
         ps.setString(5, customerMasterDTO.getCustomerphone());
-        System.out.println(ps);
         ps.execute();
         connection.commit();
 		}catch(Exception e) {e.printStackTrace();}
@@ -46,12 +45,14 @@ public class CustomerMasterDAOImpl implements CustomerMasterDAO{
 	@Override
 	public int updateCustomer(CustomerMasterDTO customerMasterDTO) {
 		CustomerMasterDTO customerobj=new CustomerMasterDTO();
-		String query="update customermaster set CustomerName=?,CustomerPhone=? where CustomerNo=?";
+		String query="update customermaster set CustomerName=?,CustomerAddress=?,CustomerPhone=?,CustomerEmail=? where CustomerNo=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, customerMasterDTO.getCustomername());
-			ps.setString(2, customerMasterDTO.getCustomerphone());
-			ps.setInt(3, customerMasterDTO.getCustomerno());
+			ps.setString(2, customerMasterDTO.getCustomeraddress());
+			ps.setString(3, customerMasterDTO.getCustomerphone());
+			ps.setString(4, customerMasterDTO.getCustomeremail());
+			ps.setInt(5, customerMasterDTO.getCustomerno());
 			System.out.println(ps);
 			ps.executeUpdate();
 			connection.commit();
