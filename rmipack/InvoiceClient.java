@@ -44,7 +44,9 @@ public class InvoiceClient {
 			break;
 		}
 		case 2:{
-			
+			System.out.println("Enter Invoice Number");
+			invno=scan.nextInt();
+			System.out.println(inv.calculateDelivery(invno));
 			break;
 		}
 		case 3:{

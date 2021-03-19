@@ -1,13 +1,20 @@
 package rmipack;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.OutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -48,8 +55,7 @@ import daytwentytwo.ItemMasterDTO;
 import daytwentytwo.ItemTransactionMasterDAOImpl;
 import daytwentytwo.ItemTransactionMasterDTO;
 public class InvoiceServer extends UnicastRemoteObject implements Invoice{
-	
-Scanner scan=new Scanner(System.in);
+
 
 public InvoiceServer() throws RemoteException{
 }
@@ -320,5 +326,59 @@ public boolean enterItem(String itemdescription, String itemunit, int price) thr
 	ItemMasterDAOImpl itemmasterdaoimpl=new ItemMasterDAOImpl(DBUtility.getConnection());
 	itemmasterdaoimpl.insertItemDetails(itemmasterdto);
 	return true;
+}
+@Override
+public String calculateDelivery(int invno) throws RemoteException {
+	try {
+	String ans="";
+	HashMap<Integer,String> datemap=new HashMap<Integer,String>();
+	datemap.put(0, "sunday");datemap.put(1, "monday");datemap.put(2, "tuesday");datemap.put(3, "wednesday");datemap.put(4, "thursday");datemap.put(5, "friday");datemap.put(6, "saturday");
+	InvoiceMasterDAOImpl invoicemasterdaoimpl=new InvoiceMasterDAOImpl(DBUtility.getConnection());
+	String date="";String invdate="";String deldate="";String location="";int speed=30;float totaltime=0;float totaltimef=0;
+	int custno;int invdateno=0;int distance=0,count=0;float remtime=0;float afttime=0;float morntime=0;float evetime=0;
+	date=invoicemasterdaoimpl.getInvoiceMaster(invno).getInvdate();
+	custno=invoicemasterdaoimpl.getInvoiceMaster(invno).getCustomerno();
+	Consignment c=new Consignment();
+	invdateno=c.getInvoiceday(date);
+	invdate=datemap.get(invdateno);
+	ans+="Date of order: "+c.getInvoicedate(date)+"\n";
+	Properties prop=new Properties();
+	prop.load(new FileInputStream("C:\\Java\\java_training\\eycorejava\\src\\rmipack\\location.properties"));
+	CustomerMasterDAOImpl customermasterdaoimpl=new CustomerMasterDAOImpl(DBUtility.getConnection());
+	location=customermasterdaoimpl.getCustomerMaster(custno).getCustomeraddress();
+	distance=Integer.parseInt((String) prop.getProperty(location));
+	ans+="Delivery Location: "+location+"\n";
+	totaltimef=((float)distance/speed);
+	totaltime=totaltimef*60;
+	while(totaltime>720)
+	{
+		totaltime=totaltime-720;
+		count++;
+	}
+	count++;
+	count=count+(2*(count)/7);
+	ans+="Delivery Date: "+c.getDeliveryDate(count)+"\n";
+	ans+="Delivery day: "+datemap.get((invdateno+count)%7).toUpperCase()+"\n";
+	morntime=c.morntime(totaltime);
+	DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
+	if(morntime<0) {
+		LocalTime lt = LocalTime.parse("06:00");
+	    ans+="Time of Delivery: "+df.format(lt.plusMinutes((int)totaltime));
+	    return ans;
+	}
+	// 08:00 - 09:00 Breakfast
+	afttime=c.afternoontime(morntime);
+	if(afttime<0) {
+		LocalTime lt = LocalTime.parse("09:00");
+	    ans+="Time of Delivery: "+df.format(lt.plusMinutes((int)(morntime)));
+	    return ans;
+	}
+	// 14:00 - 15:00 Lunch
+	evetime=c.eveningtime(afttime);
+	LocalTime lt = LocalTime.parse("15:00");
+    ans+="Time of Delivery: "+df.format(lt.plusMinutes((int)(afttime)));
+    return ans;
+	}catch(Exception e){e.printStackTrace();}
+	return "";
 }
 }
