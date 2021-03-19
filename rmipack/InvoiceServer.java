@@ -356,7 +356,17 @@ public String calculateDelivery(int invno) throws RemoteException {
 		count++;
 	}
 	count++;
-	count=count+(2*(count)/7);
+	int count1=0,ctemp=count;
+	int i=invdateno;
+	while(ctemp>0){
+		if(datemap.get(i%7)=="saturday"||datemap.get(i%7)=="sunday") {
+			count1++;
+		}
+		i++;
+		ctemp--;
+	}
+	count+=count1;
+	
 	ans+="Delivery Date: "+c.getDeliveryDate(count)+"\n";
 	ans+="Delivery day: "+datemap.get((invdateno+count)%7).toUpperCase()+"\n";
 	morntime=c.morntime(totaltime);
