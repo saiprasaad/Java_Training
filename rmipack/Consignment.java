@@ -22,7 +22,8 @@ public class Consignment implements interval{
 	public int getInvoiceday(String date) {
 		int temp=0;
 		try {
-		Date d=new SimpleDateFormat("yyyy-MM-dd").parse(date); 
+		Date d=new SimpleDateFormat("yyyy-MM-dd").parse(date);
+		System.out.println(d);
 		this.date=d;
 		temp=d.getDay();
 		}catch(Exception e) {}
@@ -36,7 +37,8 @@ public class Consignment implements interval{
 		d=new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		this.date=d;
 		}catch(Exception e) {}
-		return String.valueOf(d.getDate()+"/"+d.getMonth()+"/2021");
+		int mon=d.getMonth()+1;
+		return String.valueOf(d.getDate()+"/"+String.valueOf(mon)+"/2021");
 	}
 	@Override
 	public float morntime(float remtime) {
@@ -62,7 +64,8 @@ public class Consignment implements interval{
 	public String getDeliveryDate(int count) {
 		Date newdate=date;
 		newdate.setDate(date.getDate()+count); 
-		return String.valueOf(newdate.getDate()+"/"+newdate.getMonth()+"/2021");
+		int mon=newdate.getMonth()+1;
+		return String.valueOf(newdate.getDate()+"/"+String.valueOf(mon)+"/2021");
 	}
 
 
