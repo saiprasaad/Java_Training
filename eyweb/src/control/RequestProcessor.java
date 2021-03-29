@@ -20,8 +20,10 @@ public class RequestProcessor {
 		String formid=request.getParameter("formid");
 		String actionclass=prop.getProperty(formid);
 		model.Action action=(Action)Class.forName(actionclass).getConstructor().newInstance();
+		System.out.println(actionclass);
 		String result=action.execute(request,response);
 		String nextPage=prop.getProperty(result);
+//		System.out.println(nextPage);
 		RequestDispatcher rd=request.getRequestDispatcher(nextPage);
 		rd.forward(request, response);
 		}catch(Exception e) {

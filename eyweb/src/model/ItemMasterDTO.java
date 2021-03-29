@@ -34,10 +34,10 @@ public class ItemMasterDTO implements Serializable{
 		this.itemunit = itemunit;
 	}
 	
-	public String getCateogory() {
+	public String getCategory() {
 		return category;
 	}
-	public void setCateogory(String category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 	public String getImage() {
@@ -49,7 +49,8 @@ public class ItemMasterDTO implements Serializable{
 	@Override
 	public String toString() {
 		return "ItemMasterDTO [itemno=" + itemno + ", itemdescription=" + itemdescription + ", itemprice=" + itemprice
-				+ ", itemunit=" + itemunit + ", cateogory=" + category + ", image=" + image + "]";
+				+ ", itemunit=" + itemunit + ", category=" + category + ", image=" + image + "]";
 	}
+
 	
 }

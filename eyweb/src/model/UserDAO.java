@@ -9,4 +9,5 @@ public interface UserDAO {
 	public int updateUser(UserDTO userDTO);
 	public int insertUser(UserDTO userDTO);
 	public UserDTO getUserByName(String uname);
+	public int getcustNo(String uname);
 }

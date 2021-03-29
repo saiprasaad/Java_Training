@@ -144,4 +144,23 @@ public class UserDAOImpl implements UserDAO,Cloneable{
 				e.printStackTrace();
 			}
 	}
+
+	@Override
+	public int getcustNo(String uname) {
+		try {
+			int custno=0;
+			Connection con=DBUtility.getConnection(prop);
+			PreparedStatement ps=con.prepareStatement("select uid from users where uname=?");
+			ps.setString(1, uname);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()) {
+				custno=rs.getInt(1);
+			}
+			return custno;
+		}catch(Exception e) {
+			e.printStackTrace();
+			DBUtility.closeConnection(e);
+			return 0;
+		}
+	}
 }

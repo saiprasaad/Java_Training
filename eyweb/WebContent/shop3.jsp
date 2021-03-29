@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+            <%@ page import="java.util.Set" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +13,34 @@
 	<jsp:include page="logout.jsp"></jsp:include>
 	<hr>
 	<h1>FruitShop</h1>
-	<form action="shop.do" method="post">
-	<input type="hidden" name="formid" value="shop">
+	<form action="invoice.do" method="post">
+	<input type="hidden" name="formid" value="invoice">
 	<input type="hidden" name="shopid" value="shop3">
-		Mangoes: <input type="checkbox" name="c7" value="Mangoes">
-		Apples: <input type="checkbox" name="c8" value="Apples">
-		Bananas: <input type="checkbox" name="c9" value="Bananas">
+	<input type="hidden" name="currentid" value="fruits"> 
+		<table border="1">
+	<tr>
+	<th>Item Name</th>
+	<th>Item Quantity</th>
+	<th>Image</th>
+	<th>Select</th>
+	</tr>
+
+	<c:forEach items="${items}" var="item">
+	<tr>
+	<td>${item.getItemdescription()}</td> 
+	<td><select name=<c:out value='${item.getItemno()}' />>
+	<option value="0">Select quantity</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	</select></td>
+	<td><img src=<c:out value='${item.getImage()}'/> width="100" height="100"></td>
+	<td><input type="checkbox" name="selected" value=<c:out value='${item.getItemno()}' />></td>
+	</tr>
+</c:forEach>
+		</table>
 		
 		<input type="submit" value="Invoice..">
 	</form>

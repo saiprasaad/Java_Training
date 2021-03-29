@@ -7,5 +7,5 @@ public interface ItemMasterDAO {
 	public int deleteItemDetails(int itemno);
 	public int updateItemDetails(ItemMasterDTO itemMasterDTO);
 	public ItemMasterDTO getItemMaster(int itemno);
-	public Set<ItemMasterDTO> getItemMasterAll();
+	public Set<ItemMasterDTO> getItemMasterAll(String category);
 }

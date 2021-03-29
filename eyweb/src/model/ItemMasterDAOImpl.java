@@ -87,7 +87,7 @@ public class ItemMasterDAOImpl implements ItemMasterDAO,Cloneable{
 	public ItemMasterDTO getItemMaster(int itemno) {
 		ItemMasterDTO itemobj=new ItemMasterDTO();
 		Connection con=DBUtility.getConnection(prop);
-		String query="select * from itemmaster where itemno=?";
+		String query="select * from itemmasterwithimage where itemno=?";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1,itemno);
@@ -97,32 +97,33 @@ public class ItemMasterDAOImpl implements ItemMasterDAO,Cloneable{
 				itemobj.setItemdescription(rs.getString("itemdescription"));
 				itemobj.setItemprice(rs.getInt("itemprice"));
 				itemobj.setItemunit(rs.getString("itemunit"));
-				itemobj.setCateogory(rs.getString("category"));
+				itemobj.setCategory(rs.getString("category"));
 				itemobj.setImage(rs.getString("image"));
 			}
-			
 			
 			DBUtility.closeConnection(null);
 			return itemobj;
 		}catch(Exception e) {
 			DBUtility.closeConnection(e);
+			e.printStackTrace();
 			return null;
 		}
 	
 	}
 
 	@Override
-	public Set<ItemMasterDTO> getItemMasterAll() {
+	public Set<ItemMasterDTO> getItemMasterAll(String category) {
 		Set<ItemMasterDTO>itemdetails=new HashSet<ItemMasterDTO>();
 
-		System.out.println("hi");
 		Statement stmt;
 		try {
 			Connection con=DBUtility.getConnection(prop);
 			ItemMasterDTO itemobj;
 			stmt = con.createStatement();
-		String query="select * from itemmasterwithimage";
-		ResultSet rs=stmt.executeQuery(query);
+		String query="select * from itemmasterwithimage where category=?";
+		PreparedStatement ps=con.prepareStatement(query);
+		ps.setString(1, category);
+		ResultSet rs=ps.executeQuery();
 //		System.out.println(rs);
 		while(rs.next()) {
 			itemobj=new ItemMasterDTO();
@@ -130,15 +131,18 @@ public class ItemMasterDAOImpl implements ItemMasterDAO,Cloneable{
 			itemobj.setItemdescription(rs.getString("itemdescription"));
 			itemobj.setItemprice(rs.getInt("itemprice"));
 			itemobj.setItemunit(rs.getString("itemunit"));
-			itemobj.setItemunit(rs.getString("category"));
-			itemobj.setItemunit(rs.getString("image"));
+			itemobj.setCategory(rs.getString("category"));
+			itemobj.setImage(rs.getString("image"));
 			itemdetails.add(itemobj);
 		}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			DBUtility.closeConnection(null);
+			return itemdetails;
+		}catch(Exception e) {
+			DBUtility.closeConnection(e);
 			e.printStackTrace();
+			return null;
 		}
-		return itemdetails;
+	
 	}
 
 	

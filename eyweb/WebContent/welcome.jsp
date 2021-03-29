@@ -11,6 +11,8 @@
 	<hr>
 	<form action="shopping.do" method="post">
 	<input type="hidden" name="formid" value="shopping">		
+	<input type="hidden" name="shopid" value="jewellery">
+	
 		<input type="submit" value="Shopping...">
 	</form>
 	

@@ -3,6 +3,9 @@ package service;
 import java.util.Properties;
 
 import model.DBUtility;
+import model.InvoiceMasterDAO;
+import model.InvoiceMasterDAOImpl;
+import model.InvoiceMasterDTO;
 import model.UserDAO;
 import model.UserDAOImpl;
 import model.UserDTO;
@@ -78,5 +81,10 @@ public class LoginServiceImpl implements LoginService,Cloneable{
 		UserDAO userDao=UserDAOImpl.getUserDAOImpl(prop);
 		return userDao.insertUser(userDTO);
 	}
+	
+	@Override
+	public int getcustno(String uname) {
+		UserDAO userDao=UserDAOImpl.getUserDAOImpl(prop);
+		return userDao.getcustNo(uname);	}
 
 }
