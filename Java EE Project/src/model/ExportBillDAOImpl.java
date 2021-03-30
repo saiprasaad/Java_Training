@@ -295,8 +295,8 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 
 	@Override
 	public void sendSMS(String phone,TotalDetails totaldetails) {
-		final String ACCOUNT_SID = "AC1f50b87bb7c56d21d8df8afcecee9877";
-		final String AUTH_TOKEN = "4a8cbd8abfc6589a2e5970dc2b9b36cb";
+		final String ACCOUNT_SID = "**********************************";
+		final String AUTH_TOKEN = "***********************************";
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		String to="";
 		String message="";
