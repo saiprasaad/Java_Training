@@ -266,7 +266,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 		Session session=Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {				
-				return new PasswordAuthentication("saiprasaad1999@gmail.com", "**********");
+				return new PasswordAuthentication("saiprasaad1999@gmail.com", 																								"redminote4");
 			}
 		});
 		session.setDebug(true);
@@ -296,7 +296,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 	@Override
 	public void sendSMS(String phone,TotalDetails totaldetails) {
 		final String ACCOUNT_SID = "AC1f50b87bb7c56d21d8df8afcecee9877";
-		final String AUTH_TOKEN = "b9e24762f517b1bb3d1a85a7a35336e1";
+		final String AUTH_TOKEN = "4a8cbd8abfc6589a2e5970dc2b9b36cb";
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		String to="";
 		String message="";

@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="/WEB-INF/myjsptags.tld" prefix="mytags" %>
+<%@page import="java.util.ResourceBundle"%>
 <html>
 <head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -108,6 +111,7 @@ body {
 
 </style>
 <body>
+
   <div class="container mt-5">
     <div class="row mt-5">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto mt-5">
@@ -120,13 +124,13 @@ body {
               <div class="form-label-group">
                 <input type="text" class="form-control" name="uname" placeholder="Username" required autofocus>
                 
-                              <label for="username">Username</label>
+                              <label for="username"><mytags:bundle key="username"/></label>
 
               </div>
 
               <div class="form-label-group">
                 <input type="password" id="inputPassword" class="form-control" name="upass" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
+                <label for="inputPassword"><mytags:bundle key="password"/></label>
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
               

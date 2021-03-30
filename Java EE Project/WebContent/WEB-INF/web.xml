@@ -68,4 +68,14 @@
     <servlet-name>SMSAction</servlet-name>
     <url-pattern>/SMSAction</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LangAction</display-name>
+    <servlet-name>LangAction</servlet-name>
+    <servlet-class>model.LangAction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LangAction</servlet-name>
+    <url-pattern>/LangAction</url-pattern>
+  </servlet-mapping>
 </web-app>
