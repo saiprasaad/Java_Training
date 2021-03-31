@@ -22,11 +22,7 @@ public String execute(HttpServletRequest request, HttpServletResponse response) 
 	LoginService loginService=LoginServiceImpl.getLoginServiceImpl(prop);
 	
 	loginService.updateFlag(uname, 0);
-	Enumeration<String> e=session.getAttributeNames();
-	while(e.hasMoreElements()){
-		String name=e.nextElement();
-		session.removeAttribute(name);
-	}
+	session.invalidate();
 	return "logout.success";
 }
 }

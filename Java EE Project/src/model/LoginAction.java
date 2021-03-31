@@ -19,13 +19,13 @@ public String execute(HttpServletRequest request, HttpServletResponse response) 
 	String uname=request.getParameter("uname");
 	String upass=request.getParameter("upass");
 	Properties prop=(Properties)request.getServletContext().getAttribute("properties");
-	HttpSession session=request.getSession();
 	LoginService loginService=LoginServiceImpl.getLoginServiceImpl(prop);
 	ShoppingService shoppingService=ShoppingServiceImpl.getShoppingServiceImpl(prop);
 	if(loginService.checkUser(uname, upass)) {
 		
 		if(loginService.checkFlag(uname)) {
 			int custno=loginService.getcustno(uname);
+			 HttpSession session = request.getSession();
 			session.setAttribute("uname", uname);
 			session.setAttribute("custno", custno);
 			loginService.updateFlag(uname, 1);

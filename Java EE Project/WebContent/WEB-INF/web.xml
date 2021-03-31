@@ -78,4 +78,7 @@
     <servlet-name>LangAction</servlet-name>
     <url-pattern>/LangAction</url-pattern>
   </servlet-mapping>
+  <listener>
+        <listener-class>model.MySessionListener</listener-class>
+</listener>
 </web-app>

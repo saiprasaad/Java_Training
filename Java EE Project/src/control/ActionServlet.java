@@ -6,6 +6,8 @@ import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ActionServlet
  */
+@WebServlet(name = "ActionServlet", urlPatterns = {"*.do"}, initParams = {@WebInitParam(name = "dbconfig", value = "/WEB-INF/dbconfig.properties"),@WebInitParam(name = "config", value = "/WEB-INF/config.properties")})
+
 public class ActionServlet extends HttpServlet {
+	
 	RequestProcessor rp;Properties prop;
 	@Override
 		public void init(ServletConfig config) throws ServletException {
