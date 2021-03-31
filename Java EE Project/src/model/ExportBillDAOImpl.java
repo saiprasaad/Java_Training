@@ -82,7 +82,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 			}
 			sb.append("</items></invoice>");
 
-					File output = new File("C:\\Users\\saipr\\eclipse-workspace-j2ee\\eyweb\\"+invno+".xml");
+					File output = new File("C:\\Users\\saipr\\eclipse-workspace-j2ee\\jspservletproject\\"+invno+".xml");
 					FileWriter fwriter = new FileWriter(output);
 					fwriter.write(sb.toString());
 					fwriter.flush();
@@ -97,7 +97,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 		try {
 			String[] arr=new String[100];
 			com.itextpdf.text.Document document=new com.itextpdf.text.Document();
-			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\saipr\\eclipse-workspace-j2ee\\eyweb\\"+invno+".pdf"));
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\saipr\\eclipse-workspace-j2ee\\jspservletproject\\"+invno+".pdf"));
 		    document.open();
 		    Font boldheadFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
 		    Font boldheadFont1 = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
@@ -108,7 +108,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 			datepara.setAlignment(Paragraph.ALIGN_RIGHT);
 		    DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
 			DocumentBuilder db=dbf.newDocumentBuilder();
-			Document doc=db.parse("C:\\Users\\saipr\\eclipse-workspace-j2ee\\eyweb\\"+invno+".xml");
+			Document doc=db.parse("C:\\Users\\saipr\\eclipse-workspace-j2ee\\jspservletproject\\"+invno+".xml");
 		    Element rootElement=doc.getDocumentElement();
 		    PdfPTable table = new PdfPTable(6);
 		    table.setWidthPercentage(100);
@@ -172,7 +172,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 		try {
 		String[] arr=new String[100];
 		HSSFWorkbook wb = new HSSFWorkbook();   
-		OutputStream fileOut = new FileOutputStream("C:\\Users\\saipr\\eclipse-workspace-j2ee\\eyweb\\"+invno+".xls");   
+		OutputStream fileOut = new FileOutputStream("C:\\Users\\saipr\\eclipse-workspace-j2ee\\jspservletproject\\"+invno+".xls");   
 		HSSFWorkbook workbook = new HSSFWorkbook();  
 		HSSFSheet sheet = workbook.createSheet("Bill_Sheet");   
 		HSSFCellStyle style = workbook.createCellStyle();
@@ -207,7 +207,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 		sheet.addMergedRegion(new CellRangeAddress(6,6,1,2));
 		sheet.addMergedRegion(new CellRangeAddress(6,6,3,4));
 		DocumentBuilder db=dbf.newDocumentBuilder();
-		Document doc=db.parse("C:\\Users\\saipr\\eclipse-workspace-j2ee\\eyweb\\"+invno+".xml");
+		Document doc=db.parse("C:\\Users\\saipr\\eclipse-workspace-j2ee\\jspservletproject\\"+invno+".xml");
 		Element rootElement=doc.getDocumentElement();
 		HSSFRow row1 = sheet.createRow((short)(1));
 		row1.createCell(1).setCellValue("Customer No");
@@ -266,7 +266,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 		Session session=Session.getInstance(properties, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {				
-				return new PasswordAuthentication("saiprasaad1999@gmail.com", "**********");
+				return new PasswordAuthentication("saiprasaad1999@gmail.com","******");
 			}
 		});
 		session.setDebug(true);
@@ -280,7 +280,7 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 		BodyPart messageBodyPart = new MimeBodyPart(); 
 		messageBodyPart.setText("Hi "+name+"\n"+"Here is your bill");
 		MimeBodyPart attachmentPart = new MimeBodyPart();
-		attachmentPart.attachFile(new File("C:\\Users\\saipr\\eclipse-workspace-j2ee\\eyweb\\"+invno+".pdf"));
+		attachmentPart.attachFile(new File("C:\\Users\\saipr\\eclipse-workspace-j2ee\\jspservletproject\\"+invno+".pdf"));
 		Multipart multipart = new MimeMultipart();
 		multipart.addBodyPart(messageBodyPart);
 		multipart.addBodyPart(attachmentPart);
@@ -295,8 +295,8 @@ public class ExportBillDAOImpl implements ExportBillDAO,Cloneable{
 
 	@Override
 	public void sendSMS(String phone,TotalDetails totaldetails) {
-		final String ACCOUNT_SID = "**********************************";
-		final String AUTH_TOKEN = "***********************************";
+		final String ACCOUNT_SID = "AC1f50b87bb7c56d21d8df8afcecee9877";
+		final String AUTH_TOKEN = "4a8cbd8abfc6589a2e5970dc2b9b36cb";
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		String to="";
 		String message="";
