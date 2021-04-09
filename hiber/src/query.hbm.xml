@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="assocpack.BackupEmployee" table="BACKUPEMPLOYEE">
+	 <id name="eid" type="java.lang.Integer">			
+			
+		</id>
+        <property name="empname" />
+        <property name="empsal" />
+	</class>
+	<class name="onetomany.Employee" table="Employee">
+	 <id name="eid" type="java.lang.Integer">			
+			
+		</id>
+        <property name="empname" />
+        <property name="empsal" />
+	</class>
+	<class name="onetomany.Address" table="ADDRESS">
+        <id name="aid" type="int" unsaved-value="0">
+            <generator class="hilo"/>
+        </id>
+        <property name="street" />
+        <property name="city" />
+		<many-to-one name="emp" column="EMPLOYEE_EID" class="onetomany.Employee"/>     
+	</class>
+	</hibernate-mapping>
