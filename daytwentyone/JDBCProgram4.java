@@ -8,7 +8,7 @@ public class JDBCProgram4 {
 	public static void main(String[] args) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/ey","root","");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/<dbname>","root","");
 		PreparedStatement ps=con.prepareStatement("insert into user_login values ( ? ,?, ? ) ");
 		ps.setInt(1,1004);
 		ps.setString(2,"rohith"); 

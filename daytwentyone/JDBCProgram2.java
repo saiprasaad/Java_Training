@@ -9,7 +9,7 @@ public class JDBCProgram2 {
 	public static void main(String[] args) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/ey","root","");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/<dbname>","root","");
 		Statement stmt=con.createStatement();
 		String query="insert into user_login values('sai','admin')";
 		boolean var=stmt.execute(query);

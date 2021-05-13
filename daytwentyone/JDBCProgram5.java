@@ -9,7 +9,7 @@ public class JDBCProgram5 {
 	public static void main(String[] args) {
 		try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/ey","root","");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/<dbname>","root","");
 		CallableStatement cstmt = null;
 		String SQL = "{call insertproc (?, ? ,?)}";
 		

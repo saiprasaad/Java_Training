@@ -8,7 +8,7 @@ import java.sql.DatabaseMetaData;
 public class JDBCProgram1 {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/ey","root","");
+		Connection con=DriverManager.getConnection("jdbc:mysql://localhost/<dbname>","root","");
 		System.out.println(con);
 		DatabaseMetaData dbmd=con.getMetaData();  
 		  

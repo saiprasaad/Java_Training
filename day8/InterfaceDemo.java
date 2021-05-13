@@ -3,7 +3,7 @@ public class InterfaceDemo {
 	public static void main(String[] args) {
 		MyInterface my=new MyInterfaceImpl();
 		my.sayHello();
-		System.out.println(my.sayHello2("EY"));
+		System.out.println(my.sayHello2("Hello"));
 		System.out.println(MyInterface.pi);
 	}
 }
